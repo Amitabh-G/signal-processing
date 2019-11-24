@@ -94,10 +94,11 @@ def project_image_to_face_space(input_image_path, face_space):
     """
     Subtract mean image from the doggo.
     """
-    image_vector = image_vector - mean_image
+#    image_vector = image_vector - mean_image
     image_vector = image_vector.reshape(1, 32400)
     
     coefficients = np.dot(image_vector, face_space)
+    print(coefficients)
     '''
     Instead of dot product just add the vectors after multiplying the respective coefficients. As provided on this website.
         https://jeremykun.com/2011/07/27/eigenfaces/
