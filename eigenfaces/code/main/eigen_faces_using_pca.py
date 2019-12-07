@@ -28,8 +28,8 @@ data_matrix = np.array([list(_image.convert('L').getdata()) for _image in image_
 
 mean_image = data_matrix.mean(0)
 mean_image_reshape = mean_image.reshape(180, 180)
-mean_doggo = Image.fromarray(np.uint8(mean_image_reshape), 'L')
-mean_doggo.show()
+mean_face = Image.fromarray(np.uint8(mean_image_reshape), 'L')
+mean_face.show()
 
 pca = sklearn.decomposition.PCA()
 pca.fit(data_matrix)
@@ -43,8 +43,6 @@ def normalize_images(x):
 
 normalized_difference_doggos = np.apply_along_axis(normalize_images, axis=0, arr=Xhat)
 list_diff_images = [Image.fromarray(np.uint8(x.reshape(180, 180)), 'L') for x in normalized_difference_doggos]
-#for i in list_diff_images:
-#    i.show()
 
 """Do the same for an image."""
 
@@ -83,11 +81,11 @@ rescaled_image.show()
 def get_coordinates_face_space(pca_fit, training_data, test_face):
     """Get the coordinates of the unput images in the coordinates space."""
     training_faces_coordinates = pca_fit.transform(training_data)
-    test_face_coordinate = pca_fit.transform(test_face)
-    distances = np.absolute(np.dot(test_face_coordinate, training_faces_coordinates))
+    test_face_coordinates = pca_fit.transform(test_face)
+    distances = [np.absolute(np.linalg.norm(test_face_coordinates - training_faces_coordinates[i])) for i in range(len(training_faces_coordinates))]
     return distances
 
 distances = get_coordinates_face_space(pca, data_matrix, image_vector_diff) 
-classified_image = data_matrix[np.argmin(distances):]
-classified_image = rescale_image(classified_image)
-classified_image.show()
+classified_image_ = data_matrix[np.argmin(distances)]
+classified_image_ = rescale_image(classified_image_)
+classified_image_.show()
