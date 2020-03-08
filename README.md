@@ -1,1 +1,1 @@
-# signal-processing
+# Eigenfaces and face recognition
