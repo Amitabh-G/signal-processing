@@ -87,16 +87,3 @@ plt.subplot(235),plt.imshow(wrap,'gray'),plt.title('WRAP')
 plt.subplot(236),plt.imshow(constant,'gray'),plt.title('CONSTANT')
 
 plt.show()
-
-
-
-
-
-
-
-
-
-
-
-
-
