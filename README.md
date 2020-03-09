@@ -1,1 +1,1 @@
-# Eigenfaces and face recognition
+# Computer vision
